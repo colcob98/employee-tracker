@@ -208,7 +208,6 @@ function updateEmployeeRole() {
         name: `${employee.first_name} ${employee.last_name}`,
         value: employee["employee ID"],
       }));
-      console.log(employeeSelection);
       return dbhelpers.viewAllRoles();
     })
     .then(([roleRows]) => {
@@ -216,7 +215,6 @@ function updateEmployeeRole() {
         name: role.title,
         value: role.id,
       }));
-      console.log(roleSelection);
       return inquirer.prompt([
         {
           type: "list",
@@ -235,8 +233,6 @@ function updateEmployeeRole() {
     .then((response) => {
       const role_id = response.role_id;
       const employee_id = response.employee_id;
-      console.log(employee_id);
-      console.log(role_id);
 
       return dbhelpers.updateEmployeeRole(employee_id, role_id);
     })
