@@ -32,17 +32,17 @@ class DB {
   addDepartment(department) {
     return this.connection
       .promise()
-      .query("INSERT INTO department SET ?", department);
+      .query("INSERT INTO department (name) VALUES (?)", department);
   }
 
   addRole(role) {
-    return this.connection.promise().query("INSERT INTO role SET ?", role);
+    return this.connection.promise().query('INSERT INTO role SET ?', role);
   }
 
   addEmployee(employee) {
     return this.connection
       .promise()
-      .query("INSERT INTO employee SET ?", employee);
+      .query("INSERT INTO employee (name) VALUES (?)", employee);
   }
 
   updateEmployeeRole(employeeId, roleId) {

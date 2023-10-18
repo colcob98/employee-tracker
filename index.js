@@ -105,15 +105,84 @@ function addDepartment() {
     .prompt([
       {
         type: "input",
-        name: "addDepartment",
+        name: "department",
         message: "Please enter the department you would like to add.",
       },
     ])
     .then((response) => {
-      const department = response;
-      console.log(response.addDepartment);
-      console.log(department);
+      const newDepartment = response.department;
+
+      dbhelpers.addDepartment(newDepartment).then(() => {
+        console.log(`Added a new ${newDepartment} department to the database!`);
+        viewAllDepartments();
+      });
     });
 }
+
+function addRole() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "title",
+        message: "Please enter the role's title you would like to add.",
+      },
+      {
+        type: "input",
+        name: "salary",
+        message: "Please enter the role's salary.",
+      },
+      {
+        type: "input",
+        name: "department_id",
+        message: "Please enter the department ID for this role.",
+      },
+    ])
+    .then((response) => {
+      const role = {
+        title: response.title,
+        salary: parseFloat(response.salary), 
+        department_id: parseInt(response.department_id),
+      };
+
+      dbhelpers.addRole(role).then(() => {
+        console.log(`Added a new role to the database!`);
+        viewAllRoles();
+      });
+    });
+}
+
+function addEmployee() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "first_name",
+          message: "Please enter the employee's first name.",
+        },
+        {
+          type: "input",
+          name: "last_name",
+          message: "Please enter the role's salary:",
+        },
+        {
+          type: "input",
+          name: "department_id",
+          message: "Please enter the department ID for this role:",
+        },
+      ])
+      .then((response) => {
+        const role = {
+          title: response.title,
+          salary: parseFloat(response.salary), 
+          department_id: parseInt(response.department_id),
+        };
+  
+        dbhelpers.addRole(role).then(() => {
+          console.log(`Added a new role to the database!`);
+          viewAllRoles();
+        });
+      });
+  }
 
 showPrompts();
